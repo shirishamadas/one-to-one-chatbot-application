@@ -1,11 +1,10 @@
-import logo from './logo.svg';
-import './App.css';
+import MessageingApp from  './components/messageingApp/messagingApp';
 
 function App() {
   return (
-    <div className="App">
-      <h1>one to one chat application</h1>
-    </div>
+    <>
+      <MessageingApp />
+    </>
   );
 }
 
