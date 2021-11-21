@@ -1,21 +1,36 @@
-import {AppBar,makeStyles} from '@material-ui/core';
+import React, { useContext} from 'react';
+import {AppBar, makeStyles, Box, Toolbar} from '@material-ui/core';
 import ChatBot from '../chatBot/chatBot';
+import Signin from '../signinComponent/signInComponent';
+import { AccountContext } from '../../context/AccountProvider';
 
 const mystyle = makeStyles({
-    Header: {
-        height:150,
-        background: '#30ba57',
+    component: {
+        background: '#DCDCDC',
+        height: '100vh'
+    },
+    loginHeader: {
+        height:200,
+        background: '#00bfa5',
+        boxShadow: 'none'
+    },
+    header: {
+        height:115,
+        background: '#00bfa5',
+        boxShadow: 'none'
     }
 }) 
 
 function MessageingApp(){
-    const classes = mystyle()
+    const classes = mystyle();
+    const { account } = useContext(AccountContext);
     return (
-        <>
-            <AppBar className={classes.Header} >
-                <ChatBot />
+        <Box className={classes.component}>
+            <AppBar className={account? classes.header: classes.loginHeader} >
+                <Toolbar></Toolbar>
             </AppBar>
-        </>
+            {account? <ChatBot />: <Signin/>}
+        </Box>
     )
 }
 
