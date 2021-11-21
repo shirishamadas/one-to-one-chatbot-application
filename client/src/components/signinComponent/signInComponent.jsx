@@ -3,6 +3,7 @@ import QRCode from "react-qr-code";
 import { Dialog, withStyles, Box, Typography, makeStyles, List, ListItem } from '@material-ui/core';
 import { GoogleLogin } from 'react-google-login';
 import { AccountContext } from "../../context/AccountProvider";
+import { clientId } from "../constants/data";
 
 const useStyles = makeStyles({
     component: {
@@ -48,8 +49,6 @@ const style = {
 
 function Signin({ classes }){
     const classname = useStyles();
-    const clientId = '628901392608-kd1kmkh1opavo0bn4ruf96vti1s6k8j3.apps.googleusercontent.com';
-
     const { account, setAccount} = useContext(AccountContext);
 
     const onLoginSuccess = (res) => {
