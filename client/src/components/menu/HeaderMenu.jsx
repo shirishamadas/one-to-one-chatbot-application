@@ -3,8 +3,9 @@ import React, { useState,useContext } from "react";
 import { CallMissedSharp, MoreVert } from "@material-ui/icons";
 import { Menu, MenuItem, makeStyles } from "@material-ui/core";
 import { GoogleLogout } from "react-google-login";
-import { clientId } from "../constants/data";
+import { clientId } from "../../../constants/data";
 import { AccountContext } from "../../context/AccountProvider";
+import InfoDrawer from "../drawer/InfoDrawer";
 
 const useStyles = makeStyles({
     menuItem: {
@@ -26,6 +27,7 @@ const HeaderMenu = () => {
     const classes = useStyles();
     const [open, setOpen] = useState(false);
     const { setAccount} = useContext(AccountContext);
+    const [Draweropen, setOPenDrawer] = useState(false);
 
     const handleClose = () => {
         setOpen(false);
@@ -39,6 +41,10 @@ const HeaderMenu = () => {
         alert("you have been logged out succesfully")
         console.clear();
         setAccount('');
+    }
+
+    const toggleopen = () => {
+        setOPenDrawer(true);
     }
 
     return (
@@ -61,7 +67,7 @@ const HeaderMenu = () => {
                     horizontal: 'right'
                 }}
             >
-                <MenuItem className={classes.menuItem} onClick={handleClose}>Profile</MenuItem>
+                <MenuItem className={classes.menuItem} onClick={() => {handleClose();toggleopen()}}>Profile</MenuItem>
                 <MenuItem className={classes.menuItem} onClick={handleClose}>
                     <GoogleLogout
                         clientId={clientId}
@@ -74,6 +80,7 @@ const HeaderMenu = () => {
                     </GoogleLogout>
                 </MenuItem>
             </Menu>
+            <InfoDrawer open={Draweropen} setOpen={setOPenDrawer} />
         </>
     )
 }

@@ -10,7 +10,7 @@ const useStyles = makeStyles({
     header: {
         height: 35,
         background: '#ededed',
-        padding: '10px 16px',
+        padding: '21px 16px',
         display: 'flex',
         alignItems: 'center'
     },
