@@ -40,7 +40,7 @@ const Conversationcard = ( { users } ) => {
     useEffect(() => {
         const getConversationMessage = async () => {
             const data = await getConversation({sender: account.googleId, receiver: users.googleId});
-            setMessage({text: data.message, timestamp: data.updatedAt});
+            setMessage({text: data?.message, timestamp: data?.updatedAt});
         }
         getConversationMessage();
     },[newMessageFlag])

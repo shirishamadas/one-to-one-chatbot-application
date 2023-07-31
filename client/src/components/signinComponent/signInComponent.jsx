@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import QRCode from "react-qr-code";
 import { Dialog, withStyles, Box, Typography, makeStyles, List, ListItem } from '@material-ui/core';
-import { GoogleLogin } from 'react-google-login';
+import { GoogleLogin } from '@react-oauth/google';
 import { AccountContext } from "../../context/AccountProvider";
 import { clientId } from "../constants/data";
 import { addUser } from "../../service/api";
@@ -53,8 +53,10 @@ function Signin({ classes }){
     const { account, setAccount} = useContext(AccountContext);
 
     const onLoginSuccess = async (res) => {
-        setAccount(res.profileObj);
-        await addUser(res.profileObj)
+        console.log(res, 'response of user')
+        // setAccount(res.profileObj);
+        const result = await addUser(res);
+        setAccount(result.data);
     }
 
     const onLoginFailure = (res) => {

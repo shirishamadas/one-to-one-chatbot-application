@@ -24,7 +24,7 @@ const AccountProvider = ( { children }) => {
         console.log("activeUser",activeUser);
     },[activeUser])
 
-    console.log(account)
+    console.log(account, 'account')
 
     return (
         <AccountContext.Provider value={{

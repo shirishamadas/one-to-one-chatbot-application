@@ -13,11 +13,12 @@ const useStyles = makeStyles({
 
 const Conversations = ({ text }) => {
     const classes = useStyles();
-    const { account,socket, setActiveUsers } = useContext(AccountContext);
+    const { account, socket, setActiveUsers } = useContext(AccountContext);
     const [users,setUsers] = useState([])
     useEffect(()=>{
         const fetchData = async () =>{
             const response = await getUsers();
+            console.log(response, 'response');
             const filteredData = response.filter((user) => user.name.toLowerCase().includes(text.toLowerCase()))
             setUsers(filteredData)
         }
@@ -25,6 +26,7 @@ const Conversations = ({ text }) => {
     },[text])
 
     useEffect(() => {
+        console.log('account in socket', account);
         socket.current.emit('addUser', account.googleId);
         socket.current.on('getUsers', users => {
             console.log("getUsers",users)

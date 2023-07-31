@@ -3,7 +3,7 @@ import React, { useState,useContext } from "react";
 import { CallMissedSharp, MoreVert } from "@material-ui/icons";
 import { Menu, MenuItem, makeStyles } from "@material-ui/core";
 import { GoogleLogout } from "react-google-login";
-import { clientId } from "../../../constants/data";
+import { clientId } from "../constants/data";
 import { AccountContext } from "../../context/AccountProvider";
 import InfoDrawer from "../drawer/InfoDrawer";
 

@@ -11,10 +11,12 @@ const io = new Server(PORT, {
 let users = [];
 
 const addUser = (userId, socketId) => {
+    console.log(users, userId, 'addUser')
     !users.some(user => user.userId === userId) && users.push({ userId, socketId })
 }
 
 const getUser = (userId) => {
+    console.log(users, userId, 'userId')
     return users.find(user => user.userId === userId);
 }
 

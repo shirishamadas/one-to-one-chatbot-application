@@ -1,26 +1,30 @@
 const Users = require('../model/user');
+const jwt_decode = require("jwt-decode");
 
 const addUser = async (req,res) => {
+    console.log(req, 'reqqqqqqqqqqqqqqq', res, 'resssssssssss')
     try{
         let existingUser = await Users.findOne({googleId: req.body.googleId})
         if(existingUser){
             res.status(200).json("user already exists")
             return
         }
-        console.log(req.body);
+        var token = req.body.credential;
+        var decoded = jwt_decode(token);
+        console.log(decoded);
         console.log(new Users())
         const newUser = await new Users({
-            googleId: req.body.googleId,
-            imageUrl: req.body.imageUrl,
-            email:req.body.email,
-            name:req.body.name,
-            givenName:req.body.givenName,
-            familyName:req.body.familyName
+            googleId: req.body.clientId,
+            imageUrl: decoded.picture,
+            email: decoded.email,
+            name: decoded.name,
+            givenName: decoded.given_name,
+            familyName: decoded.family_name,
         })
-        await newUser.save(function(error) {
+         await newUser.save(function(error) {
            if(error) console.log(error)
         });
-        // res.status(200).json("user sucessfully added")
+        res.send({status: 200, data: newUser})
     }catch(error){
         res.status(500).json(error)
     }
